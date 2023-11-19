@@ -64,27 +64,19 @@ class ProductManager {
     }
   };
 
-  getProductById = (productId) => {
-    const foundProduct = this.products.find(
-      (product) => product.id === productId
-    );
+  getProductById = async (productId) => {
+    //Obtenemos los productos guardados actualmente
+    const products = await this.getProducts();
 
-    if (!foundProduct) {
-      this.products.push(
-        "El ID proporcionado no pertenece a ningun producto".toUpperCase()
-      );
-      return;
+    const foundProduct = products.find((product) => product.id === productId);
+
+    if (foundProduct) {
+      console.log("Producto encontrado exitosamente".toUpperCase());
+      return foundProduct;
+    } else {
+      return "No hay algun producto con el ID proporcionado".toUpperCase();
     }
-
-    this.products.push(
-      "Producto encontrado exitosamente".toUpperCase(),
-      foundProduct
-    );
   };
 }
-
-// newProduct.getProductById(4);
-
-// console.log(newProduct.getProducts());
 
 module.exports = ProductManager;
