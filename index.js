@@ -9,7 +9,7 @@ const env = async () => {
   console.log("Productos actuales".toUpperCase(), productos);
 
   //Datos del nuevo producto a añadir
-  const product = {
+  const newProduct = {
     title: "Smartphone",
     description:
       "Esta es una description de prueba para el producto 'Smartphone'",
@@ -19,14 +19,27 @@ const env = async () => {
     code: "0004",
     stock: 15,
   };
+  await manager.addProduct(newProduct);
 
-  await manager.addProduct(product);
+  // Datos del producto a actualizar
+  const updatedProductData = {
+    title: "Smartphone Actualizado",
+    description: "Descripción actualizada para el producto 'Smartphone'",
+    price: 8500,
+    thumbnail: "https://nueva-url-imagen.jpg",
+    stock: 20,
+  };
+  const updateResult = await manager.updateProduct(4, updatedProductData);
+  console.log(updateResult);
 
   const productsFinalResult = await manager.getProducts();
   console.log("Productos Actualizados".toUpperCase(), productsFinalResult);
 
   const productId = await manager.getProductById(2);
   console.log(productId);
+
+  const deletedProduct = await manager.deleteProduct(4);
+  console.log(deletedProduct);
 };
 
 env();
