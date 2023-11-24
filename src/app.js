@@ -1,8 +1,8 @@
-//2do desafio entregable
+//3er desafio entregable
 
-const ProductManager = require("./managers/ProductManager.js");
+const ProductManager = require("./ProductManager.js");
 
-const manager = new ProductManager("./files/Products.json");
+const manager = new ProductManager("./Products.json");
 
 const env = async () => {
   const productos = await manager.getProducts();

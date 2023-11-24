@@ -1,6 +1,5 @@
-//2do desafio entregable
+//3er desafio entregable
 
-const { triggerAsyncId } = require("async_hooks");
 const fs = require("fs");
 
 class ProductManager {
