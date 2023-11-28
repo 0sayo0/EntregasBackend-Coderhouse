@@ -1,8 +1,13 @@
 //3er desafio entregable
-
+const express = require("express");
 const ProductManager = require("./ProductManager.js");
 
+const app = express();
+
 const manager = new ProductManager("./Products.json");
+
+//Añadir siempre la siguiente linea...
+app.use(express.urlencoded({ extended: true })); //Configura Express para analizar cuerpos de solicitud en formato application/x-www-form-urlencoded. Permite objetos anidados.
 
 const env = async () => {
   const productos = await manager.getProducts();
