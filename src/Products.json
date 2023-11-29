@@ -1,29 +1,92 @@
 [
-  {
-    "title": "Screen",
-    "description": "Esta es una description de prueba para el producto 'Screen'",
-    "price": 10000,
-    "thumbnail": "https://m.media-amazon.com/images/I/71ayOdl7MQL.__AC_SX300_SY300_QL70_ML2_.jpg",
-    "code": "0001",
-    "stock": 5,
-    "id": 1
-  },
-  {
-    "title": "Keyboard",
-    "description": "Esta es una description de prueba para el producto 'Keyboard'",
-    "price": 1500,
-    "thumbnail": "https://m.media-amazon.com/images/I/71ayOdl7MQL.__AC_SX300_SY300_QL70_ML2_.jpg",
-    "code": "0002",
-    "stock": 10,
-    "id": 2
-  },
-  {
-    "title": "Headsets",
-    "description": "Esta es una description de prueba para el producto 'Headsets'",
-    "price": 3000,
-    "thumbnail": "https://m.media-amazon.com/images/I/71ayOdl7MQL.__AC_SX300_SY300_QL70_ML2_.jpg",
-    "code": "0003",
-    "stock": 7,
-    "id": 3
-  }
+	{
+		"title": "Screen",
+		"description": "Esta es una description de prueba para el producto 'Screen'",
+		"price": 10000,
+		"thumbnail": "https://m.media-amazon.com/images/I/71ayOdl7MQL.__AC_SX300_SY300_QL70_ML2_.jpg",
+		"code": "0001",
+		"stock": 5,
+		"id": 1
+	},
+	{
+		"title": "Keyboard",
+		"description": "Esta es una description de prueba para el producto 'Keyboard'",
+		"price": 1500,
+		"thumbnail": "https://m.media-amazon.com/images/I/71ayOdl7MQL.__AC_SX300_SY300_QL70_ML2_.jpg",
+		"code": "0002",
+		"stock": 10,
+		"id": 2
+	},
+	{
+		"title": "Headsets",
+		"description": "Esta es una description de prueba para el producto 'Headsets'",
+		"price": 3000,
+		"thumbnail": "https://m.media-amazon.com/images/I/71ayOdl7MQL.__AC_SX300_SY300_QL70_ML2_.jpg",
+		"code": "0003",
+		"stock": 7,
+		"id": 3
+	},
+	{
+		"title": "Smartphone",
+		"description": "Esta es una description de prueba para el producto 'Smartphone'",
+		"price": 8000,
+		"thumbnail": "https://m.media-amazon.com/images/I/71ayOdl7MQL.__AC_SX300_SY300_QL70_ML2_.jpg",
+		"code": "0004",
+		"stock": 15,
+		"id": 4
+	},
+	{
+		"title": "Camera",
+		"description": "Esta es una description de prueba para el producto 'Camera'",
+		"price": 4500,
+		"thumbnail": "https://m.media-amazon.com/images/I/71ayOdl7MQL.__AC_SX300_SY300_QL70_ML2_.jpg",
+		"code": "0005",
+		"stock": 20,
+		"id": 5
+	},
+	{
+		"title": "Printer",
+		"description": "Esta es una description de prueba para el producto 'Printer'",
+		"price": 6000,
+		"thumbnail": "https://m.media-amazon.com/images/I/71ayOdl7MQL.__AC_SX300_SY300_QL70_ML2_.jpg",
+		"code": "0006",
+		"stock": 5,
+		"id": 6
+	},
+	{
+		"title": "Laptop",
+		"description": "Esta es una description de prueba para el producto 'Laptop'",
+		"price": 25000,
+		"thumbnail": "https://m.media-amazon.com/images/I/71ayOdl7MQL.__AC_SX300_SY300_QL70_ML2_.jpg",
+		"code": "0007",
+		"stock": 6,
+		"id": 7
+	},
+	{
+		"title": "PC Desktop",
+		"description": "Esta es una description de prueba para el producto 'PC Desktop'",
+		"price": 30000,
+		"thumbnail": "https://m.media-amazon.com/images/I/71ayOdl7MQL.__AC_SX300_SY300_QL70_ML2_.jpg",
+		"code": "0008",
+		"stock": 3,
+		"id": 8
+	},
+	{
+		"title": "Tablet",
+		"description": "Esta es una description de prueba para el producto 'Tablet'",
+		"price": 15000,
+		"thumbnail": "https://m.media-amazon.com/images/I/71ayOdl7MQL.__AC_SX300_SY300_QL70_ML2_.jpg",
+		"code": "0009",
+		"stock": 5,
+		"id": 9
+	},
+	{
+		"title": "Smartwatch",
+		"description": "Esta es una description de prueba para el producto 'Smartwatch'",
+		"price": 2000,
+		"thumbnail": "https://m.media-amazon.com/images/I/71ayOdl7MQL.__AC_SX300_SY300_QL70_ML2_.jpg",
+		"code": "0010",
+		"stock": 10,
+		"id": 10
+	}
 ]
