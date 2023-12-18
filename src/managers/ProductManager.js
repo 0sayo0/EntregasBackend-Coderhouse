@@ -1,5 +1,3 @@
-//3er desafio entregable
-
 const fs = require("fs");
 
 class ProductManager {
@@ -31,9 +29,9 @@ class ProductManager {
       const products = await this.getProducts();
 
       // Desestructurar las propiedades del objeto 'producto'
-      const { title, description, price, thumbnail, code, stock } = newProduct;
+      const { title, description, price, thumbnails, code, stock } = newProduct;
 
-      if (!title || !description || !price || !thumbnail || !code || !stock) {
+      if (!title || !description || !price || !code || !stock) {
         console.log(
           "Todos los campos son obligatorios!!! Solo se mostrarán los productos que contengan todos los campos.".toUpperCase()
         );
@@ -43,6 +41,11 @@ class ProductManager {
       if (products.some((product) => product.code === code)) {
         console.log("Ya existe un producto con este codigo".toUpperCase());
         return;
+      }
+
+      //Establecer status a true si no se proporciona
+      if (newProduct.status === undefined) {
+        newProduct.status = true;
       }
 
       if (products.length === 0) {
@@ -59,8 +62,12 @@ class ProductManager {
         this.path,
         JSON.stringify(products, null, "\t")
       );
+
+      //Devolver el producto añadido
+      return newProduct;
     } catch (error) {
-      console.error(error);
+      console.log(error);
+      return null; //Indica que hubo un error
     }
   };
 

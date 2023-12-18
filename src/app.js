@@ -1,47 +1,42 @@
-//3er desafio entregable
+//1ra entrega
 const express = require("express");
-const ProductManager = require("./ProductManager.js");
+const ProductManager = require("./managers/ProductManager.js");
+const CartManager = require("./managers/CartManager.js");
+const productsRouter = require("./routes/products.router.js");
+const cartsRouter = require("./routes/carts.router.js");
+const path = require("path");
 
 const app = express();
 
-const manager = new ProductManager("./src/Products.json");
+//Path absoluto para ProductManager e inicializacion de instancia
+const productsFilePath = path.join(__dirname, "./files/Products.json");
+const manager = new ProductManager(productsFilePath);
 
-//Añadir siempre la siguiente linea...
-app.use(express.urlencoded({ extended: true })); //Configura Express para analizar cuerpos de solicitud en formato application/x-www-form-urlencoded. Permite objetos anidados.
+//Path absoluto para CartManager e inicializacion de instancia
+const cartsFilePath = path.join(__dirname, "./files/Carts.json");
+const cartManager = new CartManager(cartsFilePath);
 
-//Ruta para obtener todos los productos
-app.get("/products", async (req, res) => {
-  try {
-    let products = await manager.getProducts();
-    if (req.query.limit) {
-      let limit = parseInt(req.query.limit);
-      if (!isNaN(limit)) {
-        products = products.slice(0, limit);
-      }
-    }
-
-    res.json({ products: products });
-  } catch (error) {
-    res.status(500).send("Error al obtener los productos");
-  }
+//Midleware para adjuntar una instancia de los managers a cada solicitud entrante
+app.use((req, res, next) => {
+  req.manager = manager;
+  next();
 });
 
-app.get("/products/:pid", async (req, res) => {
-  try {
-    const productId = parseInt(req.params.pid);
-    const product = await manager.getProductById(productId);
-
-    if (product) {
-      res.json(product);
-    } else {
-      res.status(404).send("Producto no encontrado");
-    }
-  } catch (error) {
-    res.status(500).send("Error al obtener el producto");
-  }
+app.use((req, res, next) => {
+  req.cartManager = cartManager;
+  next();
 });
 
-//Ruta para mostrar solo el producto con el id proporcionado
+//Añadir siempre las siguientes lineas...
+app.use(express.json());
+app.use(
+  express.urlencoded({ extended: true })
+); /* Esto es para poder recibir diferentes tipos de datos, para no recibir
+solo cadenas de texto, si no tambien objetos, objetos dentro de objetos o incluso arreglos de objetos. */
+
+//Definimos los middlewares para los conjuntos de rutas que ocuparan cada manager
+app.use("/api/products", productsRouter);
+app.use("/api/carts", cartsRouter);
 
 const env = async () => {
   const productos = await manager.getProducts();
@@ -53,7 +48,7 @@ const env = async () => {
     description:
       "Esta es una description de prueba para el producto 'Smartwatch'",
     price: 2000,
-    thumbnail:
+    thumbnails:
       "https://m.media-amazon.com/images/I/71ayOdl7MQL.__AC_SX300_SY300_QL70_ML2_.jpg",
     code: "0010",
     stock: 10,
@@ -65,7 +60,7 @@ const env = async () => {
     title: "",
     description: "",
     price: "",
-    thumbnail: "",
+    thumbnails: "",
     stock: "",
   };
   const updateResult = await manager.updateProduct(/*4, updatedProductData*/);
