@@ -14,6 +14,7 @@ router.get("/", async (req, res) => {
 
     res.json({ products: products });
   } catch (error) {
+    console.error(error);
     res.status(500).send("Error al obtener los productos");
   }
 });
@@ -29,6 +30,7 @@ router.get("/:pid", async (req, res) => {
       res.status(404).send("Producto no encontrado");
     }
   } catch (error) {
+    console.error(error);
     res.status(500).send("Error al obtener el producto");
   }
 });

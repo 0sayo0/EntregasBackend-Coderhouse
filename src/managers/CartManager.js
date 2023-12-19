@@ -38,6 +38,55 @@ class CartManager {
     //Devolver el producto añadido
     return newCart;
   };
+
+  getCartById = async (id) => {
+    try {
+      const carts = await this.getCarts();
+      const foundCart = carts.find((cart) => cart.id === id);
+
+      if (!foundCart) {
+        console.log("No hay ningun carrito con el ID proporcionado");
+        return;
+      }
+
+      return foundCart;
+    } catch (error) {
+      console.error("Ha ocurrido un error", error);
+    }
+  };
+
+  updateCart = async (idCart, idProduct) => {
+    try {
+      //Buscamos el indice del carrito que me pasan por parametro
+      const carts = await this.getCarts();
+      const foundCart = carts.findIndex((cart) => cart.id === idCart);
+
+      //Si existe el carrito buscamos el indice del producto dentro de el
+      if (foundCart !== -1) {
+        const foundProduct = carts[foundCart].products.findIndex(
+          (product) => product.id === idProduct
+        );
+
+        //Si el producto ya existe en el carrito aumento la cantidad
+        if (foundProduct !== -1) {
+          carts[foundCart].products[foundProduct].quantity++;
+        } else {
+          carts[foundCart].products.push({ id: idProduct, quantity: 1 });
+        }
+
+        //Guardo los cambios en el archivo
+        await fs.promises.writeFile(
+          this.path,
+          JSON.stringify(carts, null, "\t")
+        );
+      } else {
+        //Si el carrito no existe muestro un mensaje de error
+        console.log("El carrito que estas tratando de actualizar no existe");
+      }
+    } catch (error) {
+      console.error("Ha ocurrido un error", error);
+    }
+  };
 }
 
 module.exports = CartManager;
