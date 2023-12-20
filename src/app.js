@@ -1,4 +1,4 @@
-//1ra entrega
+//4to desafio entregable
 const express = require("express");
 const ProductManager = require("./managers/ProductManager.js");
 const CartManager = require("./managers/CartManager.js");
@@ -7,6 +7,7 @@ const cartsRouter = require("./routes/carts.router.js");
 const path = require("path");
 
 const app = express();
+app.use("/static-files", express.static(`${__dirname}/public`)); //??? Verificar si esta linea es correcta
 
 //Path absoluto para ProductManager e inicializacion de instancia
 const productsFilePath = path.join(__dirname, "./files/Products.json");
