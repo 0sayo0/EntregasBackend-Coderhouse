@@ -9,6 +9,13 @@ const path = require("path");
 const app = express();
 app.use("/static-files", express.static(`${__dirname}/public`)); //??? Verificar si esta linea es correcta
 
+// CONFIGURAMOS NUESTRO MOTOR DE PLANTILLAS HANDLEBARS
+// Motor de plantillas a usar
+app.engine("handlebars", handlebars.engine());
+app.set("views", `${__dirname}/views`); //Especificamos donde almacenamos nuestras vistas
+app.set("view engine", "handlebars");
+// Las tres lineas anteriores aplican para cualquier motor de plantillas
+
 //Path absoluto para ProductManager e inicializacion de instancia
 const productsFilePath = path.join(__dirname, "./files/Products.json");
 const manager = new ProductManager(productsFilePath);
@@ -38,45 +45,5 @@ solo cadenas de texto, si no tambien objetos, objetos dentro de objetos o inclus
 //Definimos los middlewares para los conjuntos de rutas que ocuparan cada manager
 app.use("/api/products", productsRouter);
 app.use("/api/carts", cartsRouter);
-
-const env = async () => {
-  const productos = await manager.getProducts();
-  console.log("Productos actuales".toUpperCase(), productos);
-
-  //Datos del nuevo producto a añadir
-  const newProduct = {
-    title: "Smartwatch",
-    description:
-      "Esta es una description de prueba para el producto 'Smartwatch'",
-    price: 2000,
-    thumbnails:
-      "https://m.media-amazon.com/images/I/71ayOdl7MQL.__AC_SX300_SY300_QL70_ML2_.jpg",
-    code: "0010",
-    stock: 10,
-  };
-  await manager.addProduct(newProduct);
-
-  // Datos del producto a actualizar
-  const updatedProductData = {
-    title: "",
-    description: "",
-    price: "",
-    thumbnails: "",
-    stock: "",
-  };
-  const updateResult = await manager.updateProduct(/*4, updatedProductData*/);
-  console.log(updateResult);
-
-  const productsFinalResult = await manager.getProducts();
-  console.log("Productos Actualizados".toUpperCase(), productsFinalResult);
-
-  const productId = await manager.getProductById();
-  console.log(productId);
-
-  const deletedProduct = await manager.deleteProduct();
-  console.log(deletedProduct);
-};
-
-env();
 
 app.listen(8080, () => console.log("Listening on port 8080"));
