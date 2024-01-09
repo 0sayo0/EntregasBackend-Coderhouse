@@ -6,6 +6,7 @@ const CartManager = require("./managers/CartManager.js");
 const productsRouter = require("./routes/products.router.js");
 const cartsRouter = require("./routes/carts.router.js");
 const viewsRouter = require("./routes/views.router.js");
+const { Server } = require("socket.io");
 const path = require("path");
 
 const app = express();
@@ -50,4 +51,32 @@ app.use("/", viewsRouter);
 app.use("/api/products", productsRouter);
 app.use("/api/carts", cartsRouter);
 
-app.listen(8080, () => console.log("Listening on port 8080"));
+const server = app.listen(8080, () => console.log("Listening on port 8080"));
+
+const io = new Server(server);
+
+app.set("socketio", io);
+
+io.on("connection", (socket) => {
+  console.log("Nuevo cliente conectado");
+
+  socket.on("addProduct", async (data) => {
+    console.log(data);
+    try {
+      await manager.addProduct(data);
+      io.emit("showProducts", await manager.getProducts());
+    } catch (error) {
+      console.error(error);
+    }
+  });
+
+  socket.on("removeproduct", async (data) => {
+    try {
+      const id = Number(data);
+      await manager.deleteProduct(id);
+      io.emit("showProducts", await manager.getProducts());
+    } catch (error) {
+      console.error(error);
+    }
+  });
+});
