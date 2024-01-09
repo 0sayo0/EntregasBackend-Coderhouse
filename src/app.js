@@ -1,18 +1,20 @@
 //4to desafio entregable
 const express = require("express");
+const handlebars = require("express-handlebars");
 const ProductManager = require("./managers/ProductManager.js");
 const CartManager = require("./managers/CartManager.js");
 const productsRouter = require("./routes/products.router.js");
 const cartsRouter = require("./routes/carts.router.js");
+const viewsRouter = require("./routes/views.router.js");
 const path = require("path");
 
 const app = express();
-app.use("/static-files", express.static(`${__dirname}/public`)); //??? Verificar si esta linea es correcta
+app.use(express.static(__dirname + "/public"));
 
 // CONFIGURAMOS NUESTRO MOTOR DE PLANTILLAS HANDLEBARS
 // Motor de plantillas a usar
 app.engine("handlebars", handlebars.engine());
-app.set("views", `${__dirname}/views`); //Especificamos donde almacenamos nuestras vistas
+app.set("views", __dirname + "/views"); //Especificamos donde almacenamos nuestras vistas
 app.set("view engine", "handlebars");
 // Las tres lineas anteriores aplican para cualquier motor de plantillas
 
@@ -42,6 +44,8 @@ app.use(
 ); /* Esto es para poder recibir diferentes tipos de datos, para no recibir
 solo cadenas de texto, si no tambien objetos, objetos dentro de objetos o incluso arreglos de objetos. */
 
+//Ruta para las vistas
+app.use("/", viewsRouter);
 //Definimos los middlewares para los conjuntos de rutas que ocuparan cada manager
 app.use("/api/products", productsRouter);
 app.use("/api/carts", cartsRouter);
